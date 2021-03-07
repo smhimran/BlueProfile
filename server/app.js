@@ -4,7 +4,8 @@ import morgan from "morgan";
 import cors from "cors";
 
 // Importing Routers
-import problemRoute from "./api/routes/problems";
+import problemRoutes from "./api/routes/problems";
+import userRoutes from "./api/routes/user";
 
 const app = express();
 
@@ -18,11 +19,14 @@ app.use(cors());
 
 // Connecting to the database using mongoose
 mongoose.connect(
-  "mongodb+srv://admin:2445446726i@cluster1.todf2.mongodb.net/blue_division?retryWrites=true&w=majority"
+  "mongodb+srv://admin:" +
+    process.env.MONGO_ATLAS_PASS +
+    "@cluster1.todf2.mongodb.net/blue_division?retryWrites=true&w=majority"
 );
 
 // Using Routes
-app.use("/problems", problemRoute);
+app.use("/api/problems", problemRoutes);
+app.use("/api/user", userRoutes);
 
 app.get("/", (req, res, next) => {
   res.json({ message: "Hello World!" });
