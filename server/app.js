@@ -6,6 +6,7 @@ import cors from "cors";
 // Importing Routers
 import problemRoutes from "./api/routes/problems";
 import userRoutes from "./api/routes/user";
+import standingsRoutes from "./api/routes/standings";
 
 const app = express();
 
@@ -27,6 +28,7 @@ mongoose.connect(
 // Using Routes
 app.use("/api/problems", problemRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/standings", standingsRoutes);
 
 app.get("/", (req, res, next) => {
   res.json({ message: "Hello World!" });

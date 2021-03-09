@@ -1,5 +1,6 @@
 import express from "express";
 import mongoose from "mongoose";
+import isAuthenticated from "../middleware/isAuthenticated";
 
 // importing models
 import Problem from "../models/problem";
@@ -14,7 +15,7 @@ router.get("/", (req, res, next) => {
     .catch((error) => res.status(404).json(error));
 });
 
-router.post("/", (req, res, next) => {
+router.post("/", isAuthenticated, (req, res, next) => {
   const problem = new Problem({
     _id: new mongoose.Types.ObjectId(),
     judge: req.body.judge,
