@@ -12,77 +12,35 @@ const router = express.Router();
 
 // Get full standings
 router.get("/", async (req, res, next) => {
-  let users = [];
-  let problems = [];
-  try {
-    users = await User.find();
-    problems = await Problem.find();
-
-    let standings = [];
-
-    for (let i = 0; i < users.length; i++) {
-      try {
-        let url = "https://vjudge.net/user/solveDetail/" + users[i].vjudgeID;
-        const response = await axios.get(url);
-        let solutions = response.data.acRecords;
-        let solveCount = 0;
-        problems.forEach((problem) => {
-          let judge = problem.judge;
-          if (solutions[judge].includes(problem.problemID)) {
-            //   console.log(judge + " " + problem.problemID);
-            // let solvedProblem = judge + " " + problem.problemID;
-            solveCount++;
-          }
-        });
-        const person = {
+  User.find()
+    .exec()
+    .then((users) => {
+      users.sort((a, b) => b.solves.length - a.solves.length);
+      let standings = [];
+      for (let i = 0; i < users.length; i++) {
+        console.log(users[i].name);
+        standings.push({
           name: users[i].name,
           vjudgeID: users[i].vjudgeID,
-          solved: solveCount,
-        };
-        standings.push(person);
-      } catch (error) {
-        res.status(500).json({ message: error });
+          solveCount: users[i].solves.length,
+        });
       }
-    }
-
-    standings.sort((a, b) => b.solved - a.solved);
-
-    res.status(200).json({ standings: standings });
-  } catch (error) {
-    res.status(500).json({ message: error });
-  }
+      res.status(200).json({ standings: standings });
+    })
+    .catch((error) => res.status(500).json(error));
 });
 
 // Get specific user submissions
 router.get("/:vjudgeID", (req, res, next) => {
   const vjudgeID = req.params.vjudgeID;
 
-  Problem.find()
+  User.findOne({ vjudgeID: vjudgeID })
+    .select("name vjudgeID solves")
     .exec()
-    .then((problems) => {
-      let submissions = [];
-
-      let url = "https://vjudge.net/user/solveDetail/" + vjudgeID;
-
-      axios
-        .get(url)
-        .then((response) => {
-          let solutions = response.data.acRecords;
-
-          problems.forEach((problem) => {
-            let judge = problem.judge;
-            if (solutions[judge].includes(problem.problemID)) {
-              submissions.push(problem);
-            }
-          });
-
-          res.status(200).json({
-            submissions,
-          });
-        })
-        .catch((error) => res.status(500).json({ message: error }));
+    .then((user) => {
+      res.status(200).json(user);
     })
-    .catch((error) => res.status(500).json({ message: error }));
+    .catch((error) => res.status(404).json(error));
 });
 
 export default router;

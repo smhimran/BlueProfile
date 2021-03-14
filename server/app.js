@@ -19,11 +19,7 @@ app.use(express.json());
 app.use(cors());
 
 // Connecting to the database using mongoose
-mongoose.connect(
-  "mongodb+srv://admin:" +
-    process.env.MONGO_ATLAS_PASS +
-    "@cluster1.todf2.mongodb.net/blue_division?retryWrites=true&w=majority"
-);
+mongoose.connect("mongodb://localhost/blue_division");
 
 // Using Routes
 app.use("/api/problems", problemRoutes);

@@ -112,6 +112,7 @@ router.get("/:vjudgeID", (req, res, next) => {
           name: user[0].name,
           email: user[0].email,
           vjudgeID: user[0].vjudgeID,
+          solves: user[0].solves,
         });
       }
     })
