@@ -2,4 +2,9 @@ node_modules/
 yarn-error.log
 yarn.lock
 nodemon.json
+<<<<<<< HEAD
 .vscode/settings.json
+=======
+client_secret.json
+package-lock.json
+>>>>>>> 2f8cb46f46ebbfc8a86152965ad6acf01a2947b8
