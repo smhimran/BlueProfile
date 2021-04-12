@@ -1,0 +1,91 @@
+body {
+  background: #fff;
+  margin: 20px 50px;
+}
+
+.logo {
+  color: blue;
+  text-decoration: none;
+  font-family: fantasy;
+  font-size: xx-large;
+}
+.navbar {
+  border: 1px solid lightgrey;
+  border-radius: 8px;
+  color: black;
+}
+
+th,
+td {
+  border-right: 1px solid #e1e1e1;
+  font-family: verdana, arial, sans-serif;
+}
+
+.cnt {
+  color: #0a0;
+  font-weight: bold;
+}
+
+.info {
+  margin-top: 50px;
+  padding: 15px;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  height: 300px;
+}
+li {
+  list-style: none;
+  margin-bottom: 10px;
+  color: gray;
+}
+.icon {
+  color: gray;
+  font-weight: bolder;
+  font-size: large;
+  margin-right: 5px;
+}
+img {
+  float: right;
+  width: 100%;
+  max-width: 200px;
+  height: auto;
+}
+.accounts {
+  text-align: right;
+}
+.main {
+  margin: 120px 400px;
+  border: 1px solid lightgray;
+  border-radius: 8px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  padding-left: 40px;
+  padding-right: 20px;
+}
+
+form {
+  padding-top: 20px;
+}
+
+.card-group {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 5rem;
+}
+
+@media only screen and (max-width: 768px) {
+  /* For mobile phones: */
+  .info {
+    height: 500px;
+    text-align: center;
+  }
+  img {
+    text-align: center;
+    display: block;
+    margin-bottom: 30px;
+  }
+
+  .card-group {
+    grid-template-columns: 1fr;
+  }
+}
