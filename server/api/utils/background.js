@@ -39,6 +39,7 @@ let task = cron.schedule("* * * * *", async function () {
           submissions.push({
             judge: problem.judge,
             problemID: problem.problemID,
+            title: problem.title,
           });
         }
       });

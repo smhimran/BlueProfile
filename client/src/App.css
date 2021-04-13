@@ -54,7 +54,8 @@ img {
   text-align: right;
 }
 .main {
-  margin: 120px 400px;
+  width: 70%;
+  margin: 120px auto;
   border: 1px solid lightgray;
   border-radius: 8px;
   padding-top: 10px;
@@ -83,6 +84,10 @@ form {
     text-align: center;
     display: block;
     margin-bottom: 30px;
+  }
+
+  .main {
+    width: 95%;
   }
 
   .card-group {

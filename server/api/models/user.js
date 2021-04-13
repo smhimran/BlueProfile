@@ -7,7 +7,7 @@ const userSchema = mongoose.Schema({
   email: { type: String, required: true, unique: true },
   vjudgeID: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  solves: [{ judge: String, problemID: String }],
+  solves: [{ judge: String, problemID: String, title: String }],
 });
 
 export default mongoose.model("User", userSchema);

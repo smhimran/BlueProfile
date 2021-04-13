@@ -4,7 +4,6 @@ import {
   Switch,
   Route,
   withRouter,
-  Link,
 } from "react-router-dom";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
@@ -22,7 +21,7 @@ function App() {
           <Route path="/login" component={withRouter(Login)} />
           <Route path="/signup" component={withRouter(Signup)} />
           <Route path="/about" component={withRouter(About)} />
-          <Route path="/user/:str" component={withRouter(Profile)} />
+          <Route path="/user/:handle" component={withRouter(Profile)} />
           <Route exact path="/" component={withRouter(Home)} />
         </Switch>
       </Router>

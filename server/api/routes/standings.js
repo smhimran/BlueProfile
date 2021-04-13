@@ -18,7 +18,6 @@ router.get("/", async (req, res, next) => {
       users.sort((a, b) => b.solves.length - a.solves.length);
       let standings = [];
       for (let i = 0; i < users.length; i++) {
-        console.log(users[i].name);
         standings.push({
           name: users[i].name,
           vjudgeID: users[i].vjudgeID,
