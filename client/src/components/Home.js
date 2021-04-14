@@ -17,7 +17,7 @@ function Home() {
   return (
     <div>
       <div className="standinglist">
-        <h3 className="my-5" style={{ color: "blue", textAlign: "center" }}>
+        <h3 className="my-5" style={{ color: "#0d6efd", textAlign: "center" }}>
           Standings
         </h3>
         <table className="table table-striped table-bordered">

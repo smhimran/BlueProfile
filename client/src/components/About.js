@@ -3,7 +3,7 @@ import React from "react";
 function About() {
   return (
     <div>
-      <h3 className="my-5" style={{ color: "blue", textAlign: "center" }}>
+      <h3 className="my-5" style={{ color: "#0d6efd", textAlign: "center" }}>
         Developed By
       </h3>
       <div className="container">

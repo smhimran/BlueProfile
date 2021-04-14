@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-function Navbar() {
+function Navbar(props) {
+  let isLoggedIn = props.isLoggedIn;
+  let user = props.user;
+
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-lignt">
@@ -22,15 +25,17 @@ function Navbar() {
                 <Link className="nav-link active" aria-current="page" to="/">
                   Standings
                 </Link>
-              </li>
-              <li className="nav-item">
-                <Link className="nav-link" to="/user/imran4672">
-                  Profile
-                </Link>
-              </li>
+              </li>{" "}
+              {isLoggedIn && (
+                <li className="nav-item">
+                  <Link className="nav-link" to={`/user/${user}`}>
+                    Profile
+                  </Link>
+                </li>
+              )}
               <li className="nav-item">
                 <Link className="nav-link" to="/about">
-                  About US
+                  About Us
                 </Link>
               </li>
             </ul>

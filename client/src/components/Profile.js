@@ -2,25 +2,24 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { Link } from "react-router-dom";
+import Name from "./Name";
 
-function Profile() {
+function Profile(props) {
   const [user, setUser] = useState({});
   const [solves, setsSolves] = useState([]);
   const { handle } = useParams();
+
+  let isLoggedIn = props.isLoggedIn;
 
   useEffect(() => {
     axios
       .get(`/api/user/${handle}`)
       .then((res) => {
-        if (res.status === 200) {
-          setUser(res.data);
-          setsSolves(res.data.solves);
-        }
-
-        console.log(user);
+        setUser(res.data);
+        setsSolves(res.data.solves);
       })
       .catch((error) => console.log(error));
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [handle]);
 
   return (
     <div>
@@ -30,31 +29,30 @@ function Profile() {
           alt="User"
         /> */}
         <div className="main-info " style={{ marginBottom: "20px" }}>
-          <h1>
-            <Link
-              to={`/user/${handle}`}
-              style={{ textDecoration: "none", color: "gray" }}>
-              {user.name}
-            </Link>
-          </h1>
+          <Name name={user.name} handle={handle} />
         </div>
         <ul>
           <li>
             <i className="fa fa-user icon"></i>
             {handle}
           </li>
-          <li>
-            <i className="fa fa-edit icon"></i>
-            <Link to="/">Edit profile</Link>
-          </li>
+          {isLoggedIn && props.user === handle && (
+            <li>
+              <i className="fa fa-edit icon"></i>
+              <Link to="/">Edit profile</Link>
+            </li>
+          )}
           <li id="myScrollspy">
             <i className="fa fa-flag icon"></i>
-            <a href="#solve">Solve count</a>
+            <a style={{ textDecoration: "none" }} href="#solve">
+              Problems Solved
+            </a>
+            : {solves.length}
           </li>
         </ul>
       </div>
       <div className="solvelist" id="solve">
-        <h3 className="my-5" style={{ color: "blue", textAlign: "center" }}>
+        <h3 className="my-5" style={{ color: "#0d6efd", textAlign: "center" }}>
           Solved Problems
         </h3>
         <table className="table table-striped table-bordered">
