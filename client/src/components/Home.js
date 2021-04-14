@@ -35,10 +35,11 @@ function Home() {
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
                   <td>
-                    <Link to={`/user/${person.vjudgeID}`}>{person.name}</Link>
+                    <Link to={`/user/${person.vjudgeID}`} style={{textDecoration: 'none'}}>{person.name}</Link>
                   </td>
                   <td>
                     <a
+                      style={{textDecoration: 'none'}}
                       target="blank"
                       href={`https://vjudge.net/user/${person.vjudgeID}`}>
                       {person.vjudgeID}

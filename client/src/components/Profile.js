@@ -24,10 +24,10 @@ function Profile(props) {
   return (
     <div>
       <div className="info" style={{ position: "relative" }}>
-        {/* <img
-          src="https://userpic.codeforces.org/874704/title/46a73748a1ca9f41.jpg"
+        <img
+          src="https://i.ibb.co/mCqYDZY/152-1520367-user-profile-default-image-png-clipart-png-download.png"
           alt="User"
-        /> */}
+        />
         <div className="main-info " style={{ marginBottom: "20px" }}>
           <Name name={user.name} handle={handle} />
         </div>
@@ -68,8 +68,12 @@ function Profile(props) {
               return (
                 <tr key={index}>
                   <th scope="row">{problem.judge}</th>
-                  <td>{problem.problemID}</td>
-                  <td>{problem.title}</td>
+                  <td><a style={{textDecoration: 'none'}} target="blank" href={`https://vjudge.net/problem/${problem.judge}-${problem.problemID}`}>
+                  {problem.problemID}
+                    </a></td>
+                  <td><a style={{textDecoration: 'none'}} target="blank" href={`https://vjudge.net/problem/${problem.judge}-${problem.problemID}`}>
+                  {problem.title}
+                    </a></td>
                 </tr>
               );
             })}

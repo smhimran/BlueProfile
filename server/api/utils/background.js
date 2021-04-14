@@ -11,7 +11,7 @@ mongoose.connect("mongodb://localhost/blue_division", {
 import User from "../models/user";
 import Problem from "../models/problem";
 
-let task = cron.schedule("* * * * *", async function () {
+let task = cron.schedule("*/5 * * * *", async function () {
   console.log("Updating db started..........");
   let users = [];
   let problems = [];
