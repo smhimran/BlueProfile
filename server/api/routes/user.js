@@ -72,6 +72,8 @@ router.post("/signup", (req, res, next) => {
               _id: new mongoose.Types.ObjectId(),
               name: req.body.name,
               email: req.body.email,
+              department: req.body.department,
+              varsityID: req.body.varsityID,
               vjudgeID: vjudgeID,
               password: hash,
             });
@@ -84,6 +86,8 @@ router.post("/signup", (req, res, next) => {
                   name: result.name,
                   email: result.email,
                   vjudgeID: result.vjudgeID,
+                  department: result.department,
+                  varsityID: result.varsityID,
                 })
               )
               .catch((error) => res.status(500).json({ error: error }));
@@ -112,6 +116,8 @@ router.get("/:vjudgeID", (req, res, next) => {
           name: user[0].name,
           email: user[0].email,
           vjudgeID: user[0].vjudgeID,
+          department: user[0].department,
+          varsityID: user[0].varsityID,
           solves: user[0].solves,
         });
       }

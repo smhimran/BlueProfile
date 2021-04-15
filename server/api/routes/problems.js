@@ -9,7 +9,7 @@ const router = express.Router();
 
 router.get("/", (req, res, next) => {
   Problem.find()
-    .select("judge problemID")
+    .select("judge problemID title")
     .exec()
     .then((docs) => res.status(200).json(docs))
     .catch((error) => res.status(404).json(error));

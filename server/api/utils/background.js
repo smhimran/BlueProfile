@@ -35,12 +35,14 @@ let task = cron.schedule("*/5 * * * *", async function () {
       let solutions = response.data.acRecords;
       problems.forEach((problem) => {
         let judge = problem.judge;
-        if (solutions[judge].includes(problem.problemID)) {
-          submissions.push({
-            judge: problem.judge,
-            problemID: problem.problemID,
-            title: problem.title,
-          });
+        if (solutions[judge]) {
+          if (solutions[judge].includes(problem.problemID)) {
+            submissions.push({
+              judge: problem.judge,
+              problemID: problem.problemID,
+              title: problem.title,
+            });
+          }
         }
       });
     } catch (error) {

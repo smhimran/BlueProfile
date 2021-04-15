@@ -6,6 +6,8 @@ const userSchema = mongoose.Schema({
   name: { type: String, required: true },
   email: { type: String, required: true, unique: true },
   vjudgeID: { type: String, required: true, unique: true },
+  department: String,
+  varsityID: { type: String, unique: true },
   password: { type: String, required: true },
   solves: [{ judge: String, problemID: String, title: String }],
 });

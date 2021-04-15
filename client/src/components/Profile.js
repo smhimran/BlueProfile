@@ -6,19 +6,42 @@ import Name from "./Name";
 
 function Profile(props) {
   const [user, setUser] = useState({});
-  const [solves, setsSolves] = useState([]);
+  const [solves, setSolves] = useState([]);
+  const [problems, setProblems] = useState([]);
   const { handle } = useParams();
 
   let isLoggedIn = props.isLoggedIn;
 
   useEffect(() => {
     axios
+      .get("/api/problems")
+      .then((result) => {
+        let problemList = result.data;
+        setProblems(problemList);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+
+    axios
       .get(`/api/user/${handle}`)
       .then((res) => {
         setUser(res.data);
-        setsSolves(res.data.solves);
+        let solve = res.data.solves;
+        let updatedProblems = [];
+
+        for (let i = 0; i < solve.length; i++) {
+          let identifier = solve[i].judge + " " + solve[i].problemID;
+
+          updatedProblems.push(identifier);
+        }
+
+        setSolves(updatedProblems);
       })
       .catch((error) => console.log(error));
+
+    console.log(solves);
+    // eslint-disable-next-line
   }, [handle]);
 
   return (
@@ -33,8 +56,32 @@ function Profile(props) {
         </div>
         <ul>
           <li>
-            <i className="fa fa-user icon"></i>
-            {handle}
+            <a
+              style={{ textDecoration: "none" }}
+              href={`https://vjudge.net/user/${handle}`}>
+              <strong>
+                <i className="fa fa-user icon"></i>
+                {handle}
+              </strong>
+            </a>
+          </li>
+          <li>
+            <i className="fa fa-university icon"></i>
+            <strong>Department: </strong>
+            {user.department}
+          </li>
+          <li>
+            <i className="fa fa-id-badge icon"></i>
+            <strong>Varsity ID: </strong>
+            {user.varsityID}
+          </li>
+
+          <li id="myScrollspy">
+            <i className="fa fa-flag icon"></i>
+            <a style={{ textDecoration: "none" }} href="#solve">
+              Problems Solved
+            </a>
+            : <span className="cnt">{solves.length}</span>
           </li>
           {isLoggedIn && props.user === handle && (
             <li>
@@ -42,38 +89,55 @@ function Profile(props) {
               <Link to="/">Edit profile</Link>
             </li>
           )}
-          <li id="myScrollspy">
-            <i className="fa fa-flag icon"></i>
-            <a style={{ textDecoration: "none" }} href="#solve">
-              Problems Solved
-            </a>
-            : {solves.length}
-          </li>
         </ul>
       </div>
-      <div className="solvelist" id="solve">
+      <div className="solvelist table-responsive" id="solve">
         <h3 className="my-5" style={{ color: "#0d6efd", textAlign: "center" }}>
           Solved Problems
         </h3>
-        <table className="table table-striped table-bordered">
+        <table className="table table-striped table-bordered table-hover">
           <thead>
             <tr>
               <th scope="col">OJ</th>
               <th scope="col">Problem ID</th>
               <th scope="col">Problem Name</th>
+              <th scope="col" className="text-center">
+                Solve Status
+              </th>
             </tr>
           </thead>
           <tbody>
-            {solves.map((problem, index) => {
+            {problems.map((problem, index) => {
               return (
                 <tr key={index}>
                   <th scope="row">{problem.judge}</th>
-                  <td><a style={{textDecoration: 'none'}} target="blank" href={`https://vjudge.net/problem/${problem.judge}-${problem.problemID}`}>
-                  {problem.problemID}
-                    </a></td>
-                  <td><a style={{textDecoration: 'none'}} target="blank" href={`https://vjudge.net/problem/${problem.judge}-${problem.problemID}`}>
-                  {problem.title}
-                    </a></td>
+                  <td>
+                    <a
+                      style={{ textDecoration: "none" }}
+                      target="blank"
+                      href={`https://vjudge.net/problem/${problem.judge}-${problem.problemID}`}>
+                      {problem.problemID}
+                    </a>
+                  </td>
+                  <td>
+                    <a
+                      style={{ textDecoration: "none" }}
+                      target="blank"
+                      href={`https://vjudge.net/problem/${problem.judge}-${problem.problemID}`}>
+                      {problem.title}
+                    </a>
+                  </td>
+                  <td className="text-center">
+                    {solves.includes(
+                      problem.judge + " " + problem.problemID
+                    ) ? (
+                      <span className="cnt">
+                        <i className="fa fa-check"></i>
+                      </span>
+                    ) : (
+                      <span> </span>
+                    )}
+                  </td>
                 </tr>
               );
             })}

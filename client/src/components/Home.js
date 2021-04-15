@@ -20,7 +20,7 @@ function Home() {
         <h3 className="my-5" style={{ color: "#0d6efd", textAlign: "center" }}>
           Standings
         </h3>
-        <table className="table table-striped table-bordered">
+        <table className="table table-striped table-bordered table-hover">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -35,11 +35,15 @@ function Home() {
                 <tr key={index}>
                   <th scope="row">{index + 1}</th>
                   <td>
-                    <Link to={`/user/${person.vjudgeID}`} style={{textDecoration: 'none'}}>{person.name}</Link>
+                    <Link
+                      to={`/user/${person.vjudgeID}`}
+                      style={{ textDecoration: "none" }}>
+                      {person.name}
+                    </Link>
                   </td>
                   <td>
                     <a
-                      style={{textDecoration: 'none'}}
+                      style={{ textDecoration: "none" }}
                       target="blank"
                       href={`https://vjudge.net/user/${person.vjudgeID}`}>
                       {person.vjudgeID}
