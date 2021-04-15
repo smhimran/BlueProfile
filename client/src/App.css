@@ -20,7 +20,9 @@ td {
   border-right: 1px solid #e1e1e1;
   font-family: verdana, arial, sans-serif;
 }
-
+.p{
+  font-family: verdana, arial, sans-serif;
+}
 .cnt {
   color: #0a0;
   font-weight: bold;
