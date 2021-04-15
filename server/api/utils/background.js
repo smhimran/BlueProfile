@@ -11,8 +11,8 @@ mongoose.connect("mongodb://localhost/blue_division", {
 import User from "../models/user";
 import Problem from "../models/problem";
 
-let task = cron.schedule("*/5 * * * *", async function () {
-  console.log("Updating db started..........");
+let task = cron.schedule("* * * * *", async function () {
+  console.log("\n***Updating db started***\n");
   let users = [];
   let problems = [];
   try {
@@ -30,6 +30,7 @@ let task = cron.schedule("*/5 * * * *", async function () {
   for (let i = 0; i < users.length; i++) {
     let submissions = [];
     try {
+      console.log(`updating profile of ${users[i].vjudgeID}`);
       let url = "https://vjudge.net/user/solveDetail/" + users[i].vjudgeID;
       const response = await axios.get(url);
       let solutions = response.data.acRecords;
@@ -51,7 +52,7 @@ let task = cron.schedule("*/5 * * * *", async function () {
     users[i].solves = submissions;
     users[i].save();
   }
-  console.log("Updating db finished..........");
+  console.log("\n***Updating db finished***\n");
 });
 
 task.start();

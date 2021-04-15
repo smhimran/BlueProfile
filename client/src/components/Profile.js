@@ -137,7 +137,7 @@ function Profile(props) {
                       problem.judge + " " + problem.problemID
                     ) ? (
                       <span className="cnt">
-                        <i className="fa fa-check"></i>
+                        <i className="fa fa-check"> Accepted</i>
                       </span>
                     ) : (
                       <span> </span>
