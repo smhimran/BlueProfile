@@ -75,6 +75,11 @@ function Profile(props) {
             <strong>Varsity ID: </strong>
             {user.varsityID}
           </li>
+          <li>
+            <i className="fa fa-envelope icon"></i>
+            <strong>Email: </strong>
+            {user.email}
+          </li>
 
           <li id="myScrollspy">
             <i className="fa fa-flag icon"></i>
@@ -143,7 +148,7 @@ function Profile(props) {
             })}
           </tbody>
         </table>
-        <nav aria-label="...">
+        {/* <nav aria-label="...">
           <ul className="pagination justify-content-center">
             <li className="page-item disabled">
               <a
@@ -175,7 +180,7 @@ function Profile(props) {
               </a>
             </li>
           </ul>
-        </nav>
+        </nav> */}
       </div>
     </div>
   );
