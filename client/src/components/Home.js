@@ -55,7 +55,7 @@ function Home() {
             })}
           </tbody>
         </table>
-        <nav aria-label="...">
+        {/* <nav aria-label="...">
           <ul className="pagination justify-content-center">
             <li className="page-item disabled">
               <a
@@ -87,7 +87,7 @@ function Home() {
               </a>
             </li>
           </ul>
-        </nav>
+        </nav> */}
       </div>
     </div>
   );

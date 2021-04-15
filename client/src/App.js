@@ -11,7 +11,9 @@ import Profile from "./components/Profile";
 import Home from "./components/Home";
 import About from "./components/About";
 import Header from "./components/Header";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -21,6 +23,16 @@ function App() {
     setIsLoggedIn(value);
     setUser(currentUser);
   };
+
+  useEffect(() => {
+    const token = Cookies.get("token");
+
+    if (token) {
+      setIsLoggedIn(true);
+      let decoded = jwt.decode(token);
+      setUser(decoded.vjudgeID);
+    }
+  }, []);
 
   return (
     <div>
