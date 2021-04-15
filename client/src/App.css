@@ -75,6 +75,22 @@ form {
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 5rem;
 }
+.topics{
+  margin-bottom: 60px;
+}
+li a{
+  text-decoration: none;
+}
+
+a i{
+  font-size: "20px";
+  padding-left: "5px";
+  color: "gray"; 
+  font-weight: "bold";
+}
+.lin{
+  list-style: initial;
+}
 
 @media only screen and (max-width: 768px) {
   /* For mobile phones: */

@@ -34,12 +34,17 @@ function Navbar(props) {
                 </li>
               )}
               <li className="nav-item">
+                <Link className="nav-link" to="/resources">
+                  Resources
+                </Link>
+              </li>
+              <li className="nav-item">
                 <Link className="nav-link" to="/about">
                   About Us
                 </Link>
               </li>
             </ul>
-            <form className="d-flex">
+            {/* <form className="d-flex">
               <input
                 className="form-control me-2"
                 type="search"
@@ -49,7 +54,7 @@ function Navbar(props) {
               <button className="btn btn-outline-success" type="submit">
                 Search
               </button>
-            </form>
+            </form> */}
           </div>
         </div>
       </nav>

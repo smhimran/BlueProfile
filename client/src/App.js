@@ -11,6 +11,7 @@ import Profile from "./components/Profile";
 import Home from "./components/Home";
 import About from "./components/About";
 import Header from "./components/Header";
+import Resources from "./components/Resources"
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
@@ -58,6 +59,7 @@ function App() {
             />
           </Route>
           <Route path="/about" component={withRouter(About)} />
+          <Route path="/resources" component={withRouter(Resources)} />
           <Route path="/user/:handle">
             <Profile
               isLoggedIn={isLoggedIn}
