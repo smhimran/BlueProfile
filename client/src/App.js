@@ -73,6 +73,7 @@ function App() {
             path="/update-profile"
             component={UpdateProfile}
             isLoggedIn={isLoggedIn}
+            handleStateChange={handleStateChange}
             exact
           />
           <Route exact path="/" component={withRouter(Home)} />

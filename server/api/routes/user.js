@@ -131,13 +131,9 @@ router.patch("/:vjudgeID", isAuthenticated, (req, res, next) => {
   console.log(req.userData.vjudgeID);
   // console.log(process.env.ADMIN_ID);
   if (
-    vjudgeID != req.userData.vjudgeID &&
-    req.userData.vjudgeID !== process.env.ADMIN_ID
+    vjudgeID === req.userData.vjudgeID ||
+    req.userData.vjudgeID === process.env.ADMIN_ID
   ) {
-    res.status(401).json({
-      message: "You do not have permission to update this user!",
-    });
-  } else {
     let updateOps = {};
 
     if (req.userData.vjudgeID === process.env.ADMIN_ID && req.body.password) {
@@ -193,12 +189,15 @@ router.patch("/:vjudgeID", isAuthenticated, (req, res, next) => {
           res.status(500).json({ message: error });
         });
     }
-
+  } else {
     // console.log("Ok!");
     // for (let ops of req.body) {
     //   console.log(ops.propName);
     //   updateOps[ops.propName] = ops.value;
     // }
+    res.status(401).json({
+      message: "You do not have permission to update this user!",
+    });
   }
 });
 
