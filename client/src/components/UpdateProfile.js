@@ -154,13 +154,13 @@ function UpdateProfile(props) {
               />
             </div>
 
-            {successAlert && (
+            {/* {successAlert && (
               <div
                 className="alert alert-success alert-dismissible fade show"
                 role="alert">
                 Update Successful!
               </div>
-            )}
+            )} */}
 
             {errorAlert && (
               <div

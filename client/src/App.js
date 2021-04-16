@@ -14,6 +14,7 @@ import Header from "./components/Header";
 import Resources from "./components/Resources";
 import UpdateProfile from "./components/UpdateProfile";
 import PrivateRoute from "./components/PrivateRoute";
+import NotFound from "./components/NotFound";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
@@ -77,6 +78,7 @@ function App() {
             exact
           />
           <Route exact path="/" component={withRouter(Home)} />
+          <Route path="/*" component={NotFound} />
         </Switch>
       </Router>
     </div>

@@ -3,20 +3,51 @@ import React from "react";
 function About() {
   return (
     <div>
-      <h3 className="my-5 mb-3" style={{ color: "#0d6efd", textAlign: "center" }}>
-        Motivation
+      <h3
+        className="my-5 mb-3"
+        style={{ color: "#0d6efd", textAlign: "center" }}>
+        What is Blue Profile?
       </h3>
       <div className="card shadow w-95">
         <div className="card-body">
-          <p className="card-text" >
-            <p>Generally, every Programmer needs a guideline to follow and practice to grow properly. Without guidelines most of the programmers get distracted. So Blue sheet is such a sheet that contains problems that decides the necessary guidelines. Here problems are sorted in such a way that beginners will start and continue practicing and slowly they will become greater programming assets.</p> <br></br>
-	
-	          <p>The Blue sheet is created for <b>DIU ACM</b> members originally by <b>Mahmudur Rahman</b> sir (MMRN, World Finalist 2007). Normally users have to write "OK" manually after solving a problem from the sheet. This process is not suitable for a large number of users and need supervision.</p><br></br>
-
-	          <p>So we wanted to make this "Blue profile" site so that users don't have to track the original sheet manually and can focus more on practice. It will update automatically when any user will solve a problem. Users can view their total solve count, solve list also their standings among other Blue Solvers. <b>This site will update automatically in every 5 minutes</b>. So the whole process is quite easy to use and can be easily maintained. Currently, the site is receiving all the data from "VJudge" as all blue problems are available in VJudge.</p><br></br>
-            <p>If you face any problem or trace any bug please report to us via e-mail.</p>
+          <p className="card-text">
+            <p>
+              Generally, every Programmer needs a guideline to follow and
+              practice to grow properly. Without guidelines most of the
+              programmers get distracted. So Blue sheet is such a sheet that
+              contains problems that decides the necessary guidelines. Here
+              problems are sorted in such a way that beginners will start and
+              continue practicing and slowly they will become greater
+              programming assets.
+            </p>{" "}
+            <br></br>
+            <p>
+              The Blue sheet is created for <b>DIU ACM</b> members originally by{" "}
+              <b>Mahmudur Rahman</b> sir (MMRN, World Finalist 2007). Normally
+              users have to write "OK" manually after solving a problem from the
+              sheet. This process is not suitable for a large number of users
+              and need supervision. Also, users can solve problems in various
+              practice contests without realizing whether the problem is from
+              the Blue sheet.
+            </p>
+            <br></br>
+            <p>
+              So we wanted to make this "Blue profile" site so that users don't
+              have to track the original sheet manually and can focus more on
+              practice. It will update automatically when any user will solve a
+              problem. Users can view their total solve count, solve list also
+              their standings among other Blue Solvers.{" "}
+              <b>This site will update automatically in every 5 minutes</b>. So
+              the whole process is quite easy to use and can be easily
+              maintained. Currently, the site is receiving all the data from
+              "VJudge" as all blue problems are available in VJudge.
+            </p>
+            <br></br>
+            <p>
+              If you face any problem or trace any bug please report to us via
+              e-mail.
+            </p>
           </p>
-
         </div>
       </div>
       <h3 className="my-5" style={{ color: "#0d6efd", textAlign: "center" }}>
@@ -40,9 +71,7 @@ function About() {
                 <h6 className="text-muted">
                   Daffodil International University
                 </h6>
-                <h6 className="text-muted">
-                  E-mail: kaniz15-10742@diu.edu.bd
-                </h6>
+                <h6 className="text-muted">E-mail: kaniz15-10742@diu.edu.bd</h6>
               </p>
             </div>
           </div>
@@ -61,9 +90,7 @@ function About() {
                 <h6 className="text-muted">
                   Daffodil International University
                 </h6>
-                <h6 className="text-muted">
-                  E-mail: imran15-10627@diu.edu.bd
-                </h6>
+                <h6 className="text-muted">E-mail: imran15-10627@diu.edu.bd</h6>
               </p>
             </div>
           </div>
@@ -90,7 +117,7 @@ function About() {
           </div>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 

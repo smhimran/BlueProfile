@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import morgan from "morgan";
 import cors from "cors";
+import path from "path";
 
 // Importing Routers
 import problemRoutes from "./api/routes/problems";
@@ -21,13 +22,17 @@ app.use(cors());
 // Connecting to the database using mongoose
 mongoose.connect("mongodb://localhost/blue_division");
 
+// Serving Static files
+app.use(express.static(path.join(__dirname, "../client/build")));
+
 // Using Routes
 app.use("/api/problems", problemRoutes);
 app.use("/api/user", userRoutes);
 app.use("/api/standings", standingsRoutes);
 
-app.get("/", (req, res, next) => {
-  res.json({ message: "Hello World!" });
+// Handling any request that doesn't match the above
+app.get("*", (req, res, next) => {
+  res.sendFile(path.join(__dirname + "../client/build/index.html"));
 });
 
 app.use((req, res, next) => {
