@@ -72,7 +72,7 @@ router.post("/signup", (req, res, next) => {
               _id: new mongoose.Types.ObjectId(),
               name: req.body.name,
               email: req.body.email,
-              department: req.body.department,
+              institute: req.body.institute,
               varsityID: req.body.varsityID,
               vjudgeID: vjudgeID,
               password: hash,
@@ -86,8 +86,8 @@ router.post("/signup", (req, res, next) => {
                   name: result.name,
                   email: result.email,
                   vjudgeID: result.vjudgeID,
-                  department: result.department,
-                  varsityID: result.varsityID,
+                  institute: result.institute,
+                  instituteID: result.varsityID,
                 })
               )
               .catch((error) => res.status(500).json({ error: error }));
@@ -116,7 +116,7 @@ router.get("/:vjudgeID", (req, res, next) => {
           name: user[0].name,
           email: user[0].email,
           vjudgeID: user[0].vjudgeID,
-          department: user[0].department,
+          institute: user[0].institute,
           varsityID: user[0].varsityID,
           solves: user[0].solves,
         });
@@ -128,25 +128,77 @@ router.get("/:vjudgeID", (req, res, next) => {
 // Update a User
 router.patch("/:vjudgeID", isAuthenticated, (req, res, next) => {
   const vjudgeID = req.params.vjudgeID;
-  if (vjudgeID != req.userData.vjudgeID) {
+  console.log(req.userData.vjudgeID);
+  // console.log(process.env.ADMIN_ID);
+  if (
+    vjudgeID != req.userData.vjudgeID &&
+    req.userData.vjudgeID !== process.env.ADMIN_ID
+  ) {
     res.status(401).json({
       message: "You do not have permission to update this user!",
     });
   } else {
-    const updateOps = {};
+    let updateOps = {};
 
-    for (const ops of req.body) {
-      updateOps[ops.propName] = ops.value;
+    if (req.userData.vjudgeID === process.env.ADMIN_ID && req.body.password) {
+      let pass = req.body.password;
+      bcrypt.hash(pass, 10, (err, hash) => {
+        if (err) {
+          console.log(err);
+          res.status(500).json({ error: err });
+        } else {
+          updateOps = {
+            name: req.body.name,
+            email: req.body.email,
+            institute: req.body.institute,
+            varsityID: req.body.varsityID,
+            vjudgeID: req.body.vjudgeID,
+            password: hash,
+          };
+          // console.log(updateOps);
+
+          User.updateOne({ vjudgeID: vjudgeID }, { $set: updateOps })
+            .exec()
+            .then((result) =>
+              res.status(200).json({
+                message: "User updated successfully!",
+              })
+            )
+            .catch((error) => {
+              console.log(error);
+              res.status(500).json({ message: error });
+            });
+          return;
+        }
+      });
+    } else {
+      updateOps = {
+        name: req.body.name,
+        email: req.body.email,
+        institute: req.body.institute,
+        varsityID: req.body.varsityID,
+        vjudgeID: req.body.vjudgeID,
+      };
+      console.log(updateOps);
+
+      User.updateOne({ vjudgeID: vjudgeID }, { $set: updateOps })
+        .exec()
+        .then((result) =>
+          res.status(200).json({
+            message: "User updated successfully!",
+          })
+        )
+        .catch((error) => {
+          console.log(error);
+          res.status(500).json({ message: error });
+        });
     }
 
-    User.updateOne({ vjudgeID: vjudgeID }, { $set: updateOps })
-      .exec()
-      .then((result) =>
-        res.status(200).json({
-          message: "User updated successfully!",
-        })
-      )
-      .catch((error) => res.status(500).json({ message: error }));
+    // console.log("Ok!");
+    // for (let ops of req.body) {
+    //   console.log(ops.propName);
+    //   updateOps[ops.propName] = ops.value;
+    // }
   }
 });
 

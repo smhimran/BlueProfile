@@ -36,7 +36,7 @@ function Header(props) {
           ) : (
             <button
               type="button"
-              class="btn btn-outline-danger"
+              className="btn btn-outline-danger"
               onClick={handleLogout}>
               <span>
                 <i className="fa fa-sign-out"></i>

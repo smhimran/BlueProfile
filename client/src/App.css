@@ -20,7 +20,7 @@ td {
   border-right: 1px solid #e1e1e1;
   font-family: verdana, arial, sans-serif;
 }
-.p{
+.p {
   font-family: verdana, arial, sans-serif;
 }
 .cnt {
@@ -75,20 +75,20 @@ form {
   grid-template-columns: 1fr 1fr 1fr;
   grid-column-gap: 5rem;
 }
-.topics{
+.topics {
   margin-bottom: 60px;
 }
-li a{
+li a {
   text-decoration: none;
 }
 
-a i{
+a i {
   font-size: "20px";
   padding-left: "5px";
-  color: "gray"; 
+  color: "gray";
   font-weight: "bold";
 }
-.lin{
+.lin {
   list-style: initial;
 }
 

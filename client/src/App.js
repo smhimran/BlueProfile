@@ -11,7 +11,9 @@ import Profile from "./components/Profile";
 import Home from "./components/Home";
 import About from "./components/About";
 import Header from "./components/Header";
-import Resources from "./components/Resources"
+import Resources from "./components/Resources";
+import UpdateProfile from "./components/UpdateProfile";
+import PrivateRoute from "./components/PrivateRoute";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import jwt from "jsonwebtoken";
@@ -67,6 +69,12 @@ function App() {
               handleStateChange={handleStateChange}
             />
           </Route>
+          <PrivateRoute
+            path="/update-profile"
+            component={UpdateProfile}
+            isLoggedIn={isLoggedIn}
+            exact
+          />
           <Route exact path="/" component={withRouter(Home)} />
         </Switch>
       </Router>

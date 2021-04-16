@@ -40,7 +40,7 @@ function Profile(props) {
       })
       .catch((error) => console.log(error));
 
-    console.log(solves);
+    // console.log(solves);
     // eslint-disable-next-line
   }, [handle]);
 
@@ -67,12 +67,12 @@ function Profile(props) {
           </li>
           <li>
             <i className="fa fa-university icon"></i>
-            <strong>Department: </strong>
-            {user.department}
+            <strong>Institute: </strong>
+            {user.institute}
           </li>
           <li>
             <i className="fa fa-id-badge icon"></i>
-            <strong>Varsity ID: </strong>
+            <strong>Institute ID: </strong>
             {user.varsityID}
           </li>
           <li>
@@ -91,7 +91,7 @@ function Profile(props) {
           {isLoggedIn && props.user === handle && (
             <li>
               <i className="fa fa-edit icon"></i>
-              <Link to="/">Edit profile</Link>
+              <Link to="/update-profile">Edit profile</Link>
             </li>
           )}
         </ul>

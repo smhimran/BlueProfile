@@ -52,7 +52,9 @@ function Login(props) {
           </h5>
           <form className="form-inline" onSubmit={handlSubmit}>
             <div className="form-group mb-3">
-              <label htmlFor="email">Email address</label>
+              <label htmlFor="email">
+                Email address <span style={{ color: "#e32" }}>*</span>
+              </label>
               <input
                 type="email"
                 className="form-control"
@@ -65,7 +67,9 @@ function Login(props) {
               />
             </div>
             <div className="form-group mb-3">
-              <label htmlFor="password">Password</label>
+              <label htmlFor="password">
+                Password <span style={{ color: "#e32" }}>*</span>
+              </label>
               <input
                 type="password"
                 className="form-control"

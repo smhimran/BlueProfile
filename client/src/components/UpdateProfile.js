@@ -1,50 +1,61 @@
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import React, { useState } from "react";
+import Cookies from "js-cookie";
+import jwt from "jsonwebtoken";
 
-function Signup() {
+function UpdateProfile() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [handle, setHandle] = useState("");
   const [institute, setInstitute] = useState("");
   const [varsityID, setVarsityID] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirm_pasword, setCconfirm_pasword] = useState("");
-  const [malert, setAlert] = useState(false);
   const [successAlert, setSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
+  useEffect(() => {
+    const token = Cookies.get("token");
+    const decoded = jwt.decode(token);
+
+    const userHandle = decoded.vjudgeID;
+
+    axios
+      .get(`/api/user/${userHandle}`)
+      .then((res) => {
+        const user = res.data;
+        setName(user.name);
+        setEmail(user.email);
+        setHandle(user.vjudgeID);
+        setInstitute(user.institute);
+        setVarsityID(user.varsityID);
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (password !== "" && password === confirm_pasword) {
-      setAlert(false);
-      setErrorAlert(false);
-      setSuccessAlert(false);
-      setErrorMessage("");
-      const user = {
-        name,
-        email,
-        vjudgeID: handle,
-        institute,
-        varsityID,
-        password,
-      };
-      axios
-        .post("/api/user/signup", user)
-        .then((res) => {
-          if (res.status === 201) {
-            setSuccessAlert(true);
-          }
-        })
-        .catch((error) => {
-          setErrorAlert(true);
-          setErrorMessage(
-            error.response.data.message || "Registration failed!"
-          );
-        });
-    } else if (password !== "") {
-      setAlert(true);
-    }
+
+    const user = {
+      name,
+      email,
+      institute: institute,
+      varsityID: varsityID,
+      vjudgeID: handle,
+    };
+
+    const token = Cookies.get("token");
+
+    axios
+      .patch(`/api/user/${handle}`, user, {
+        headers: { Authorization: `Token ${token}` },
+      })
+      .then((res) => {
+        setSuccessAlert(true);
+      })
+      .catch((error) => {
+        setErrorAlert(true);
+        setErrorMessage(error.response.data.message || "Update failed!");
+      });
   };
 
   return (
@@ -56,7 +67,7 @@ function Signup() {
             paddingBottom: "15px",
             color: "blue",
           }}>
-          Register
+          Update Profile
         </h5>
         <form className="form-inline" onSubmit={handleSubmit}>
           <div className="form-group mb-3">
@@ -105,11 +116,11 @@ function Signup() {
             />
           </div>
           <div className="form-group mb-3">
-            <label htmlFor="institute">Institute</label>
+            <label htmlFor="handle">Institute</label>
             <input
               type="text"
               className="form-control"
-              id="institute"
+              id="handle"
               aria-describedby="emailHelp"
               placeholder="Institute name"
               value={institute}
@@ -117,58 +128,23 @@ function Signup() {
             />
           </div>
           <div className="form-group mb-3">
-            <label htmlFor="instituteID">Institute ID</label>
+            <label htmlFor="handle">Institute ID</label>
             <input
               type="text"
               className="form-control"
-              id="instituteID"
+              id="handle"
               aria-describedby="emailHelp"
               placeholder="Institute ID"
               value={varsityID}
               onChange={(e) => setVarsityID(e.target.value)}
             />
           </div>
-          <div className="form-group mb-3">
-            <label htmlFor="password">
-              Password <span style={{ color: "#e32" }}>*</span>
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="password"
-              placeholder="Password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </div>
-          <div className="form-group mb-3">
-            <label htmlFor="confirmpass">
-              Confirm Password <span style={{ color: "#e32" }}>*</span>
-            </label>
-            <input
-              type="password"
-              className="form-control"
-              id="confirmpass"
-              placeholder="Confirm Password"
-              value={confirm_pasword}
-              onChange={(e) => setCconfirm_pasword(e.target.value)}
-              required
-            />
-          </div>
-          {malert && (
-            <div
-              className="alert alert-danger alert-dismissible fade show"
-              role="alert">
-              Passwords didn't match!
-            </div>
-          )}
 
           {successAlert && (
             <div
               className="alert alert-success alert-dismissible fade show"
               role="alert">
-              Registration Successful!
+              Update Successful!
             </div>
           )}
 
@@ -189,4 +165,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default UpdateProfile;
