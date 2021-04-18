@@ -78,7 +78,7 @@ function App() {
             exact
           />
           <Route exact path="/" component={withRouter(Home)} />
-          <Route path="/*" component={NotFound} />
+          <Route component={NotFound} />
         </Switch>
       </Router>
     </div>

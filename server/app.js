@@ -32,12 +32,13 @@ app.use("/api/standings", standingsRoutes);
 
 // Handling any request that doesn't match the above
 app.get("*", (req, res, next) => {
-  res.sendFile(path.join(__dirname + "../client/build/index.html"));
+  res.sendFile(path.join(__dirname + "/../client/build/index.html"));
 });
 
 app.use((req, res, next) => {
   const error = new Error("Not found!");
   error.status = 404;
+
   next(error);
 });
 
